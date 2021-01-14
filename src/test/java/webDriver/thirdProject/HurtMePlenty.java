@@ -31,9 +31,12 @@ public class HurtMePlenty {
         elementsOfTheMainPage.clickOnInputOfRequest();
         elementsOfTheMainPage.inputTheRequest("Google Cloud Platform Pricing Calculator");
 
-        driver.navigate().to("https://cloud.google.com/products/calculator");
+        WebElement frame0 = driver.findElement( By.xpath("//*[@id='master-1']"));
+        driver.switchTo().frame(frame0);
+        
+        elementsOfTheMainPage.clickOnSearchResult();
 
-        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe")));
+        new WebDriverWait(driver,60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe")));
 
         WebElement frame1 = driver.findElement( By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe"));
         driver.switchTo().frame(frame1);
