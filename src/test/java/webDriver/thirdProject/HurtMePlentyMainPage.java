@@ -8,23 +8,31 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HurtMePlentyMainPage extends  HurtMePlenty{
     public WebDriver driver;
+    
+    @FindBy(css = "div.devsite-search-container")
+    private WebElement searchButton;
+    
+    @FindBy(xpath = "//*[contains(@class, 'devsite-search-field devsite-search-query')]")
+    private WebElement searchInput;
+    
+    @FindBy(xpath = "//*[@id='___gcse_0']//div/div[5]/div[2]/div//div[1]/div[1]/div[1]/div[1]/div/a")
+    private WebElement searchResult;
+    
     public HurtMePlentyMainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    @FindBy(css = "div.devsite-search-container")
-    private WebElement searchButton;
-
     public void clickOnInputOfRequest() {
         searchButton.click();;
     }
 
-    @FindBy(xpath = "//*[contains(@class, 'devsite-search-field devsite-search-query')]")
-    private WebElement searchInput;
-
     public void inputTheRequest(String string) {
         searchInput.sendKeys(string);
         searchInput.sendKeys(Keys.ENTER);
+    }
+    
+      public  void clickOnSearchResult() {
+        searchResult.click();
     }
 }
