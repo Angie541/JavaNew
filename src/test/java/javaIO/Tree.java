@@ -11,17 +11,47 @@ import java.util.stream.Stream;
 
 public class Tree {
     public static void main(String[] arg) throws Exception {
-        String startPoint = "C:/Temp/movies";
+        String startPoint = "C:/Temp/movies/Amon Amarth";
 
         List<String> result = new ArrayList();
+        
         try (Stream<Path> path = Files.walk(Paths.get(startPoint))) {
             result = path.filter(Files::isExecutable).map(x -> {
 
-                if (Files.isDirectory(x)) {
-                    return "             |" + "\n" + "dir:    " + "     |----" + x.getFileName().toString();
+                int numberOfDirs = 0;
+                List<Path> listOfDirs = null;
+
+                try {
+                    listOfDirs = Files.walk(Path.of(startPoint))
+                            .filter(p -> p != Path.of(startPoint) && p.toFile().isDirectory()).collect(Collectors.toList());
+
+                    numberOfDirs = listOfDirs.size();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                return "file:   " + "     |    " + x.getFileName().toString();
+                Path lastDirectoryPath = listOfDirs.get(numberOfDirs - 1).toAbsolutePath();
+                
+                
+                if (Files.isDirectory(x)) {
+                    
+                     if (startPoint.endsWith(x.getFileName().toString())){
+
+                        return("dir:         " + x.getFileName());
+                     }
+                        String  str = "-";
+                    
+                    return ("             |"  + "\ndir:         |" + str.repeat(x.getNameCount()) + x.getFileName().toString());
+                }
+                            
+                        if ((x.getParent().toString()).equalsIgnoreCase(lastDirectoryPath.toString())) {     
+                            
+
+                       return("file:              " + x.getFileName().toString());
+                    }
+
+                return("file:   " + "     |     " + x.getFileName().toString());
 
             }).collect(Collectors.toList());
 
