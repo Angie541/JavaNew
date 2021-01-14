@@ -12,6 +12,9 @@ import org.testng.Assert;
 
 public class BringItOnTest {
     private WebDriver driver;
+    
+    public BringItOnTest(WebDriver driver) {
+    }
 
     @BeforeMethod (alwaysRun = true)
     public void browserSetup(){
@@ -33,10 +36,6 @@ public class BringItOnTest {
         pageElements.choosePasteExpiration();
         pageElements.inputPasteName("how to gain dominance among developers");
         pageElements.createNewPasteButton();
-
-        new WebDriverWait(driver,10).until(ExpectedConditions.titleIs("how to gain dominance among developers - Pastebin.com"));
-
-        driver.navigate().to("https://pastebin.com/HPT5icpc");
 
         String extrasInTitle = " - Pastebin.com";
         String browserTitle = driver.getTitle();
