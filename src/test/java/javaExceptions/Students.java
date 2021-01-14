@@ -14,23 +14,21 @@ class Students extends Groups {
         super();
     }
 
-    public Students(String nameAndLastName, String subject1, int mark1, String subject2, int mark2)
+    public Students(String facultyName, int groupNumber, String nameAndLastName, String subject1, int mark1, String subject2, int mark2)
             throws MarkException, LackOfSubjectsException {
-        super();
+        super(facultyName, groupNumber);
         this.nameAndLastName = nameAndLastName;
+        this.subject1 = subject1;
+        this.mark1 = mark1;
+        this.subject2 = subject2;
+        this.mark2 = mark2;
 
         if (subject1 == "" && subject2 == "")
             throw new LackOfSubjectsException();
-        this.subject1 = subject1;
-
         if (10 < mark1 || mark1 < 0)
             throw new MarkException();
-        this.mark1 = mark1;
-
-        this.subject2 = subject2;
         if (10 < mark2 || mark2 < 0)
             throw new MarkException();
-        this.mark2 = mark2;
     }
 
     public String getName() {
@@ -54,7 +52,7 @@ class Students extends Groups {
     }
 
     public String getEverything() {
-        return "     " + nameAndLastName + ":   |" + subject1 + ", " + mark1 + ", " + subject2 + ", " + mark2 + "|";
+        return "       (f." + facultyName  + ",  gr." +  groupNumber  + ")  :      " + nameAndLastName + ":    |" + subject1 + ", " + mark1 + ", " + subject2 + ", " + mark2 + "|";
     }
 
     public int getAverageMarkOfAStudent() {
@@ -82,37 +80,39 @@ class Students extends Groups {
                 sum += averageMark.getMark2();
             }
         }
-        System.out.println("\nAverage Mark of Group (" + nameOfTheGroup + ")  by " + subj + " = " + "{"
+        System.out.println("\nAverage Mark of Group (" + nameOfTheGroup.get(nameOfTheGroup.size()-1).groupNumber + ")  by " + subj + " = " + "{"
                 + (sum / numberOfStudents) + "}");
     }
 
-    // Calculating the University's average mark by a subject + The Checking for
+    // Calculating the University's average mark by the subject + Checking for
     // absence of empty groups, faculties and University
     public void getAverageMarkOfUniversity(ArrayList<ArrayList<ArrayList<Students>>> nameOfTheUniversity, String subj)
             throws EmptyException {
         int sum = 0;
         int numberOfStudents = 0;
-        for (ArrayList<ArrayList<Students>> faculty : nameOfTheUniversity) {
-            for (ArrayList<Students> group : faculty) {
+        
+       if (nameOfTheUniversity.isEmpty())
+            throw new EmptyException("ERROR. The University doesn't have any faculties!");
 
-                if (nameOfTheUniversity.isEmpty())
-                    throw new EmptyException("ERROR. The University doesn't have any faculties!");
+            for (ArrayList<ArrayList<Students>> faculty : nameOfTheUniversity) {
                 if (faculty.isEmpty())
                     throw new EmptyException("ERROR. The Faculty doesn't have any groups!");
-                if (group.isEmpty())
-                    throw new EmptyException("ERROR. The Group doesn't have any students!");
 
-                for (Students students : group) {
-                    if (students.getSubject1() == subj) {
-                        numberOfStudents += 1;
-                        sum += students.getMark1();
-                    } else if (students.getSubject2() == subj) {
-                        numberOfStudents += 1;
-                        sum += students.getMark2();
+                for (ArrayList<Students> group : faculty) {
+                    if (group.isEmpty())
+                        throw new EmptyException("ERROR. The Group doesn't have any students!");
+
+                    for (Students students : group) {
+                        if (students.getSubject1() == subj) {
+                            numberOfStudents += 1;
+                            sum += students.getMark1();
+                        } else if (students.getSubject2() == subj) {
+                            numberOfStudents += 1;
+                            sum += students.getMark2();
+                        }
                     }
                 }
             }
-        }
         System.out.println("\nAverage Mark of University by " + subj + ":  {" + (sum / numberOfStudents) + "}");
     }
 }
