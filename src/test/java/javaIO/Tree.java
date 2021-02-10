@@ -13,10 +13,12 @@ public class Tree {
     public static void main(String[] arg) throws Exception {
         String startPoint = "C:/Temp/movies/Amon Amarth";
 
-        List<String> result = new ArrayList();
+        if (new File(startPoint).isDirectory()) {
+              
+          List<String> result = new ArrayList();
         
-        try (Stream<Path> path = Files.walk(Paths.get(startPoint))) {
-            result = path.filter(Files::isExecutable).map(x -> {
+          try (Stream<Path> path = Files.walk(Paths.get(startPoint))) {
+             result = path.filter(Files::isExecutable).map(x -> {
 
                 int numberOfDirs = 0;
                 List<Path> listOfDirs = null;
@@ -73,5 +75,55 @@ public class Tree {
         }
 
         movieFile.close();
+            
+            
+       } else if(new File(startPoint).isFile()){
+            int sumOfFileNameLengths = 0;
+            String additionalPart = "file:        |     ";
+
+            Stream<String> readableLines =
+                Files.lines(Paths.get(startPoint));
+
+            long  numberOfDirectories = readableLines
+                .flatMap(s -> Stream.of(s.contains("dir: "))).filter(t -> t.booleanValue())
+                .count();
+
+            System.out.println("Number of directories: " + numberOfDirectories);
+
+
+            Stream<String> readableLines1 =
+                Files.lines(Paths.get(startPoint));
+
+            long  numberOfFiles = readableLines1
+                .flatMap(s -> Stream.of(s.contains("file: "))).filter(t -> t.booleanValue())
+                .count();
+
+            System.out.println("Number of files: " + numberOfFiles);
+
+
+            Stream<String> readableLines2 =
+                Files.lines(Paths.get(startPoint));
+
+            long  numberOfDirectoriesWithFiles = readableLines2
+                .flatMap(s -> Stream.of(s.contains("dir:         |----"))).filter(t -> t.booleanValue())
+                .count();
+
+            System.out.println("Average number of files in a directory: " + numberOfFiles/numberOfDirectoriesWithFiles );
+
+
+            Stream<String> readableLines3 =
+                Files.lines(Paths.get(startPoint));
+
+            List linesWithFileNames = Arrays.stream(readableLines3
+                .flatMap(s -> Stream.of(s.split("dir"))).filter(name -> name.contains("mp3")).toArray()).collect(Collectors.toList());
+
+                for (int i = 0; i < linesWithFileNames.size(); i++) {
+
+                  String str = linesWithFileNames.get(i).toString();
+                  String fileName = str.substring(additionalPart.length());
+                  sumOfFileNameLengths = fileName.length() + sumOfFileNameLengths;
+                }
+             System.out.println("Average length of file name: " + sumOfFileNameLengths/numberOfFiles );
+        }
     }
 }
