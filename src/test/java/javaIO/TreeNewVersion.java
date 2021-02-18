@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Tree {
+public class TreeNewVersion {
     public static void main(String[] arg) throws Exception {
         String startPoint = arg[0];
         if (new File(startPoint).isDirectory()) {
