@@ -40,7 +40,7 @@ public class TreeNewVersion {
 
                     if (Files.isDirectory(x)) {
 
-                        if (startPoint.endsWith(x.getFileName().toString())) {
+                        if (startPoint.endsWith(x.toString())) {
 
                             return ("dir:         " + x.getFileName());
                         }
