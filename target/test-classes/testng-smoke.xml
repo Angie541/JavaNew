@@ -2,7 +2,7 @@
 <suite name="Smoke" verbose="1" >
 <test name="Hardcore"   >
     <classes>
-        <class name="webDriver.fourthProject_framework.test.HardcoreTests" />
+        <class name="webDriver.fourthProject_framework.test.HardcoreTest" />
     </classes>
 </test>
 </suite>

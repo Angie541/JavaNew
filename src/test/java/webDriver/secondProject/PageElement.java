@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PageElements extends AbstractPage {
+public class PageElement extends AbstractPage {
     @FindBy(xpath = "//*[contains(@id, 'postform-text')]")
     private WebElement newPasteInput;
 
@@ -26,41 +26,41 @@ public class PageElements extends AbstractPage {
     @FindBy(xpath = "//*[contains(@class, 'btn -big')]")
     private WebElement newPasteButton;
 
-    public PageElements(WebDriver driver) {
+    public PageElement(WebDriver driver) {
         super(driver);
     }
 
-    public PageElements openPage() {
+    public PageElement openPage() {
         driver.get("https://pastebin.com");
         return this;
     }
 
-    public PageElements inputNewPaste(String string) {
+    public PageElement inputNewPaste(String string) {
         newPasteInput.sendKeys(string);
         return this;
     }
 
-    public PageElements openSyntaxHighlightingDropdownMenu() {
+    public PageElement openSyntaxHighlightingDropdownMenu() {
         syntaxHighlightingDropdownMenu.click();
         return this;
     }
 
-    public PageElements chooseSyntaxHighlighting() {
+    public PageElement chooseSyntaxHighlighting() {
         syntaxHighlightingBash.click();
         return this;
     }
 
-    public PageElements openPasteExpirationDropdownMenu() {
+    public PageElement openPasteExpirationDropdownMenu() {
         pasteExpirationDropdownMenu.click();
         return this;
     }
 
-    public PageElements choosePasteExpiration() {
+    public PageElement choosePasteExpiration() {
         pasteExpirationTenMinutes.click();
         return this;
     }
 
-    public PageElements inputPasteName(String string) {
+    public PageElement inputPasteName(String string) {
         pasteNameInput.sendKeys(string);
         return this;
     }

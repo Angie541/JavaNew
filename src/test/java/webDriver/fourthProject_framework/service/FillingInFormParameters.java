@@ -14,11 +14,16 @@ public class FillingInFormParameters {
     public static final String TESTDATA_FORM_PARAMETERS_DATACENTER_LOCATION = "testdata.formParameters.datacenterLocation";
     public static final String TESTDATA_FORM_PARAMETERS_COMMITED_USAGE = "testdata.formParameters.commitedUsage";
 
-    public static FormParameters withNumberOfInstances() {
-       return new FormParameters(TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_NUMBER_OF_INSTANCES));
-    }
-
-    public static FormParameters withOperatingSystemAndSoftware() {
-        return new FormParameters(TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_OPERATING_SYSTEM_AND_SOFTWARE));
+    public static FormParameters withFormParameters() {
+        return new FormParameters(TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_NUMBER_OF_INSTANCES),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_OPERATING_SYSTEM_AND_SOFTWARE),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_MACHINE_CLASS),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_SERIES),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_MACHINE_TYPE),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_NUMBER_OF_GPUS),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_TYPE_OF_GPUS),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_LOCAL_SSD),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_DATACENTER_LOCATION),
+                TestDataReader.getTestData(TESTDATA_FORM_PARAMETERS_COMMITED_USAGE));
     }
 }

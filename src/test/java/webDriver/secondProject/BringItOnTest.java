@@ -2,12 +2,10 @@ package webDriver.secondProject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class BringItOnTest {
     private WebDriver driver;
@@ -23,7 +21,7 @@ public class BringItOnTest {
         String paste = "git config --global user.name  \"New Sheriff in Town\"\n" + "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" + "git push origin master --force";
         String pasteName = "how to gain dominance among developers";
 
-        BringItOnResult pageElements = new BringItOnPageElements(driver)
+        PageResult pageElements = new PageElement(driver)
                 .openPage()
                 .inputNewPaste(paste)
                 .openSyntaxHighlightingDropdownMenu()
@@ -33,10 +31,11 @@ public class BringItOnTest {
                 .inputPasteName(pasteName)
                 .createNewPaste();
 
-        new WebDriverWait(driver, 1000).until(ExpectedConditions.titleIs(pasteName + extrasInTitle));
-        Assert.assertEquals(pageElements.getPasteName(), pasteName + extrasInTitle);
-        Assert.assertEquals(pageElements.getSyntaxHighlighting(), "bash");
-        Assert.assertEquals(pageElements.getPaste(), paste);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(pageElements.getPasteName(), pasteName + extrasInTitle);
+        softAssert.assertEquals(pageElements.getSyntaxHighlighting(), "bash");
+        softAssert.assertEquals(pageElements.getPaste(), paste);
+        softAssert.assertAll();
     }
 
     @AfterMethod(alwaysRun = true)
