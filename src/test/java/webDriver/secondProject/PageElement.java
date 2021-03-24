@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BringItOnPageElements extends AbstractPage {
+public class PageElements extends AbstractPage {
     @FindBy(xpath = "//*[contains(@id, 'postform-text')]")
     private WebElement newPasteInput;
 
@@ -26,47 +26,47 @@ public class BringItOnPageElements extends AbstractPage {
     @FindBy(xpath = "//*[contains(@class, 'btn -big')]")
     private WebElement newPasteButton;
 
-    public BringItOnPageElements(WebDriver driver) {
+    public PageElements(WebDriver driver) {
         super(driver);
     }
 
-    public BringItOnPageElements openPage() {
+    public PageElements openPage() {
         driver.get("https://pastebin.com");
         return this;
     }
 
-    public BringItOnPageElements inputNewPaste(String string) {
+    public PageElements inputNewPaste(String string) {
         newPasteInput.sendKeys(string);
         return this;
     }
 
-    public BringItOnPageElements openSyntaxHighlightingDropdownMenu() {
+    public PageElements openSyntaxHighlightingDropdownMenu() {
         syntaxHighlightingDropdownMenu.click();
         return this;
     }
 
-    public BringItOnPageElements chooseSyntaxHighlighting() {
+    public PageElements chooseSyntaxHighlighting() {
         syntaxHighlightingBash.click();
         return this;
     }
 
-    public BringItOnPageElements openPasteExpirationDropdownMenu() {
+    public PageElements openPasteExpirationDropdownMenu() {
         pasteExpirationDropdownMenu.click();
         return this;
     }
 
-    public BringItOnPageElements choosePasteExpiration() {
+    public PageElements choosePasteExpiration() {
         pasteExpirationTenMinutes.click();
         return this;
     }
 
-    public BringItOnPageElements inputPasteName(String string) {
+    public PageElements inputPasteName(String string) {
         pasteNameInput.sendKeys(string);
         return this;
     }
 
-    public BringItOnResult createNewPaste() {
+    public PageResult createNewPaste() {
         newPasteButton.click();
-        return new BringItOnResult(driver);
+        return new PageResult(driver);
     }
 }
