@@ -1,5 +1,4 @@
 package webDriver.fourthProject_framework.model;
-
 public class FormParameters {
     private String numberOfInstances;
     private String operatingSystemAndSoftware;
@@ -25,29 +24,15 @@ public class FormParameters {
         this.commitedUsage = commitedUsage;
     }
 
-    public FormParameters(String numberOfInstances) {
-        this.numberOfInstances = numberOfInstances;
-    }
-
-    public FormParameters() {
-        super();
-    }
-
-    public String getNumberOfInstances() {
-        return numberOfInstances;
-    }
+    public String getNumberOfInstances() { return numberOfInstances; }
 
     public void setNumberOfInstances(String numberOfInstances) {
         this.numberOfInstances = numberOfInstances;
     }
 
-    public String getOperatingSystemAndSoftware() {
-        return operatingSystemAndSoftware;
-    }
+    public String getOperatingSystemAndSoftware() { return operatingSystemAndSoftware; }
 
-    public void setOperatingSystemAndSoftware(String operatingSystemAndSoftware) {
-        this.operatingSystemAndSoftware = operatingSystemAndSoftware;
-    }
+    public void setOperatingSystemAndSoftware(String operatingSystemAndSoftware) { this.operatingSystemAndSoftware = operatingSystemAndSoftware; }
 
     public String getMachineClass() {
         return machineClass;

@@ -9,4 +9,3 @@ import java.util.ResourceBundle;
             return resourceBundle.getString(key);
         }
     }
-

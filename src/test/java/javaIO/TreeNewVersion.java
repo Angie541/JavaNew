@@ -13,7 +13,7 @@ public class TreeNewVersion {
     public static void main(String[] arg) throws Exception {
         String startPoint = arg[0];
         if (new File(startPoint).isDirectory()) {
-            
+
             List<String> result = new ArrayList();
 
             try (Stream<Path> path = Files.walk(Paths.get(startPoint))) {
