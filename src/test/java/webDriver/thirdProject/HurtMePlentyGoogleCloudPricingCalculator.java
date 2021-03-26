@@ -1,5 +1,6 @@
 package webDriver.thirdProject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -58,19 +59,19 @@ public class HurtMePlentyGoogleCloudPricingCalculator extends AbstractPage {
     @FindBy(xpath = "//*[contains(@placeholder,'Local SSD')] [@ng-model='listingCtrl.computeServer.ssd']")
     private WebElement localSSDDropdownMenu;
 
-    @FindBy(xpath = "//*[@value='2'][@id='select_option_383']")
+    @FindBy(xpath = "//*[contains(@class, 'md-active') and @aria-hidden='false']//div[contains(text(), '2x375 GB')]")
     private WebElement localSSD;
 
     @FindBy(xpath = "//*[contains(@placeholder,'Datacenter location')][@ng-model='listingCtrl.computeServer.location']")
     private WebElement datacenterLocationDropdownMenu;
 
-    @FindBy(xpath = "//*[contains(@value,'europe-west3')][@id='select_option_207']")
+    @FindBy(xpath = "//*[contains(@class, 'md-active') and @aria-hidden='false']//div[contains(text(), 'Frankfurt (europe-west3)')]")
     private WebElement datacenterLocation;
 
     @FindBy(xpath = "//*[contains(@aria-label,'Committed usage: None')][@ng-model='listingCtrl.computeServer.cud']")
     private WebElement commitedUsageDropdownMenu;
 
-    @FindBy(xpath = "//*[contains(@ng-value,'1')][@id='select_option_99']")
+    @FindBy(xpath = "//*[contains(@class, 'md-active') and @aria-hidden='false']//div[contains(text(), '1 Year')]")
     private WebElement commitedUsage;
 
     @FindBy(xpath = "//*[contains(@class,'md-raised md-primary cpc-button md-button md-ink-ripple')][@ng-click='listingCtrl.addComputeServer(ComputeEngineForm);'] [@aria-label='Add to Estimate']")
@@ -78,6 +79,14 @@ public class HurtMePlentyGoogleCloudPricingCalculator extends AbstractPage {
 
     public HurtMePlentyGoogleCloudPricingCalculator(WebDriver driver) {
         super(driver);
+    }
+
+    public HurtMePlentyGoogleCloudPricingCalculator switchToCalculator() {
+        WebElement frame1 = driver.findElement(By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe"));
+        driver.switchTo().frame(frame1);
+        WebElement frame2 = driver.findElement(By.xpath("//*[@id='myFrame']"));
+        driver.switchTo().frame(frame2);
+        return this;
     }
 
     public HurtMePlentyGoogleCloudPricingCalculator clickOnInput() {
@@ -96,104 +105,70 @@ public class HurtMePlentyGoogleCloudPricingCalculator extends AbstractPage {
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openOperatingSystemDropDownMenu() {
-        operatingSystemAndSoftwareDropdownMenu.click();
-        return this;
-    }
-
     public HurtMePlentyGoogleCloudPricingCalculator chooseOperatingSystemAndSoftware() {
+        operatingSystemAndSoftwareDropdownMenu.click();
+        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(operatingSystemAndSoftware));
         operatingSystemAndSoftware.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openMachineClassDropdownMenu() {
-        machineClassDropdownMenu.click();
-        return this;
-    }
-
     public HurtMePlentyGoogleCloudPricingCalculator chooseMachineClass() {
+        machineClassDropdownMenu.click();
+        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(machineClass));
         machineClass.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openSeriesDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseSeries() {
         seriesDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(series));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseSeries() {
         series.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openMachineTypeDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseMachineType() {
         machineTypeDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(machineType));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseMachineType() {
         machineType.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator clickOnCheckboxAddGPUs() {
+    public HurtMePlentyGoogleCloudPricingCalculator addGPUs() {
         checkboxAddGPUs.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openNumberOfGPUsDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseNumberOfGPUs() {
         numberOfGPUsDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(numberOfGPUs));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseNumberOfGPUs() {
         numberOfGPUs.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openTypeOfGPUsDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseTypeOfGPUs() {
         typeOfGPUsDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(typeOfGPUs));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseTypeOfGPUs() {
         typeOfGPUs.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openLocalSSDDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseLocalSSD() {
         localSSDDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(localSSD));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseLocalSSD() {
         localSSD.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openDatacenterLocationDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseDatacenterLocation() {
         datacenterLocationDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(datacenterLocation));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseDatacenterLocation() {
         datacenterLocation.click();
         return this;
     }
 
-    public HurtMePlentyGoogleCloudPricingCalculator openCommitedUsageDropdownMenu() {
+    public HurtMePlentyGoogleCloudPricingCalculator chooseCommitedUsage() {
         commitedUsageDropdownMenu.click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(commitedUsage));
-        return this;
-    }
-
-    public HurtMePlentyGoogleCloudPricingCalculator chooseCommitedUsage() {
         commitedUsage.click();
         return this;
     }

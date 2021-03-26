@@ -4,14 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PageResult extends AbstractPage {
+public class PageResults extends AbstractPage {
     @FindBy(xpath = "/html/body//textarea")
     private WebElement pasteArea;
 
     @FindBy(xpath = "/html/body//ol")
     private WebElement syntaxHighlighting;
 
-    public PageResult(WebDriver driver) {
+    public PageResults(WebDriver driver) {
         super(driver);
     }
 

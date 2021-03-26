@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HardcoreTenMinuteMailPage extends AbstractPage{
+public class HardcoreTenMinuteMailPage extends AbstractPage {
     @FindBy(xpath = "//*[contains(@id, 'mail_address')]")
     private WebElement mailAddress;
 

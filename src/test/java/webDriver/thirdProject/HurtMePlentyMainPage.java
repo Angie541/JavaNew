@@ -1,6 +1,5 @@
 package webDriver.thirdProject;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,21 +26,16 @@ public class HurtMePlentyMainPage extends AbstractPage{
         return this;
     }
 
-    public HurtMePlentyMainPage clickOnInputOfRequest() {
-        searchButton.click();
-        return this;
-    }
-
     public HurtMePlentyMainPage inputTheRequest(String string) {
+        searchButton.click();
         searchInput.sendKeys(string);
         searchInput.sendKeys(Keys.ENTER);
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(searchResult));
         return this;
     }
 
-    public  HurtMePlentyMainPage clickOnSearchResult() {
+    public HurtMePlentyGoogleCloudPricingCalculator clickOnSearchResult() {
         searchResult.click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='cloud-site']/devsite-iframe/iframe")));
-        return this;
+        return new HurtMePlentyGoogleCloudPricingCalculator(driver);
     }
 }
